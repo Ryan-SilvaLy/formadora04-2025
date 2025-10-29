@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "./src/screens/HomeScreen";
-import AddTaskScreen from "./src/screens/AddTaskScreen";
-import EditTaskScreen from "./src/screens/EditTaskScreen"; // ✅ nova tela
+import HomeScreen from "./screens/HomeScreen";
+import AddTaskScreen from "./screens/AddTaskScreen";
+import EditTaskScreen from "./screens/EditTaskScreen"; // ✅ nova tela
 
 export type RootStackParamList = {
   Home: undefined;
