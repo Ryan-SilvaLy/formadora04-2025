@@ -34,6 +34,7 @@ export async function addTarefa(tarefa: Tarefa) {
   return res.json();
 }
 
+
 // Atualizar tarefa
 export async function updateTarefa(id: string, updatedFields: Partial<Tarefa>) {
   const res = await fetch(`${BASE_URL}/tarefas/${id}`, {

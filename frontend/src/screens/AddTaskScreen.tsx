@@ -50,10 +50,26 @@ export default function AddTaskScreen() {
       return;
     }
 
+    if (!date) {
+      Alert.alert("Erro", "Selecione uma data para a tarefa");
+      return;
+    }
+
+    // Validação: não aceitar datas passadas
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const selectedDate = new Date(date);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      Alert.alert("Erro", "Não é permitido escolher datas passadas");
+      return;
+    }
+
     const newTask: Tarefa = {
       title,
       description,
-      date: date ? date.toISOString() : undefined,
+      date: date.toISOString(),
       time: time ? time.toLocaleTimeString() : undefined,
       priority,
       category,
@@ -99,6 +115,7 @@ export default function AddTaskScreen() {
         <input
           type="date"
           value={date ? date.toISOString().split("T")[0] : ""}
+          min={new Date().toISOString().split("T")[0]} // bloqueia datas passadas
           onChange={(e) => setDate(new Date(e.target.value))}
           style={styles.htmlInput}
         />
@@ -117,6 +134,7 @@ export default function AddTaskScreen() {
               value={date || new Date()}
               mode="date"
               display="default"
+              minimumDate={new Date()} // bloqueia datas passadas
               onChange={(event, selectedDate) => {
                 setShowDatePicker(Platform.OS === "ios");
                 if (selectedDate) setDate(selectedDate);
